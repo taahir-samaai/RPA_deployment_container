@@ -562,6 +562,7 @@ aiofiles==23.2.1
 psutil==5.9.6
 python-dateutil==2.8.2
 pytz==2023.3
+pyotp==2.9.0
 EOF
     fi
     
