@@ -1,0 +1,688 @@
+{
+    "title": "Recording 05/08/2025 at 12:10:21",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 546,
+            "height": 585,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "chrome://new-tab-page/",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "chrome://new-tab-page/",
+                    "title": "New Tab"
+                }
+            ]
+        },
+        {
+            "type": "navigate",
+            "url": "https://my.evotel.co.za/Account/Login",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Account/Login",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/E-Mail Address"
+                ],
+                [
+                    "#Email"
+                ],
+                [
+                    "xpath///*[@id=\"Email\"]"
+                ],
+                [
+                    "pierce/#Email"
+                ]
+            ],
+            "offsetY": 21.354156494140625,
+            "offsetX": 162.6666660308838
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/E-Mail Address"
+                ],
+                [
+                    "#Email"
+                ],
+                [
+                    "xpath///*[@id=\"Email\"]"
+                ],
+                [
+                    "pierce/#Email"
+                ]
+            ],
+            "offsetY": 21.354156494140625,
+            "offsetX": 162.6666660308838,
+            "button": "secondary"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/E-Mail Address"
+                ],
+                [
+                    "#Email"
+                ],
+                [
+                    "xpath///*[@id=\"Email\"]"
+                ],
+                [
+                    "pierce/#Email"
+                ]
+            ],
+            "offsetY": 15.354156494140625,
+            "offsetX": 23.66666603088379,
+            "button": "secondary"
+        },
+        {
+            "type": "change",
+            "value": "vcappont2.bot@vcontractor.co.za",
+            "selectors": [
+                [
+                    "aria/E-Mail Address"
+                ],
+                [
+                    "#Email"
+                ],
+                [
+                    "xpath///*[@id=\"Email\"]"
+                ],
+                [
+                    "pierce/#Email"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "#Password"
+                ],
+                [
+                    "xpath///*[@id=\"Password\"]"
+                ],
+                [
+                    "pierce/#Password"
+                ]
+            ],
+            "offsetY": 12.5,
+            "offsetX": 130.6666660308838
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "#Password"
+                ],
+                [
+                    "xpath///*[@id=\"Password\"]"
+                ],
+                [
+                    "pierce/#Password"
+                ]
+            ],
+            "offsetY": 18.5,
+            "offsetX": 86.66666603088379,
+            "button": "secondary"
+        },
+        {
+            "type": "change",
+            "value": "Vodabot#01",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "#Password"
+                ],
+                [
+                    "xpath///*[@id=\"Password\"]"
+                ],
+                [
+                    "pierce/#Password"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Login[role=\"button\"]"
+                ],
+                [
+                    "div.container button"
+                ],
+                [
+                    "xpath///*[@id=\"loginForm\"]/form/div[4]/div/button"
+                ],
+                [
+                    "pierce/div.container button"
+                ]
+            ],
+            "offsetY": 14.64581298828125,
+            "offsetX": 47.66666603088379,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Manage/Index",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "body"
+                ],
+                [
+                    "xpath//html/body"
+                ],
+                [
+                    "pierce/body"
+                ]
+            ],
+            "offsetY": 717,
+            "offsetX": 0
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Serial Number Search"
+                ],
+                [
+                    "#SearchString"
+                ],
+                [
+                    "xpath///*[@id=\"SearchString\"]"
+                ],
+                [
+                    "pierce/#SearchString"
+                ]
+            ],
+            "offsetY": 15.447906494140625,
+            "offsetX": 174.6666660308838
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Serial Number Search"
+                ],
+                [
+                    "#SearchString"
+                ],
+                [
+                    "xpath///*[@id=\"SearchString\"]"
+                ],
+                [
+                    "pierce/#SearchString"
+                ]
+            ],
+            "offsetY": 15.447906494140625,
+            "offsetX": 127.66666603088379,
+            "button": "secondary"
+        },
+        {
+            "type": "change",
+            "value": "48575443FF7B15AD",
+            "selectors": [
+                [
+                    "aria/Serial Number Search"
+                ],
+                [
+                    "#SearchString"
+                ],
+                [
+                    "xpath///*[@id=\"SearchString\"]"
+                ],
+                [
+                    "pierce/#SearchString"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Search Serial"
+                ],
+                [
+                    "#btnSearch"
+                ],
+                [
+                    "xpath///*[@id=\"btnSearch\"]"
+                ],
+                [
+                    "pierce/#btnSearch"
+                ],
+                [
+                    "text/Search Serial"
+                ]
+            ],
+            "offsetY": 11.59375,
+            "offsetX": 71.84375,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Search?SearchString=48575443FF7B15AD",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Vodacom Fibre Broadband 60Mbps Uncapped[role=\"link\"]"
+                ],
+                [
+                    "td:nth-of-type(3) > a"
+                ],
+                [
+                    "xpath///*[@id=\"WebGrid\"]/tbody/tr/td[3]/a"
+                ],
+                [
+                    "pierce/td:nth-of-type(3) > a"
+                ],
+                [
+                    "text/Vodacom Fibre"
+                ]
+            ],
+            "offsetY": 8.697906494140625,
+            "offsetX": 99,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Service/Info/5911a6a6-cb12-48a3-8055-604e3c21fcdf",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Cancel Service"
+                ],
+                [
+                    "div.container a:nth-of-type(3)"
+                ],
+                [
+                    "xpath///*[@id=\"divInfoArea\"]/div[11]/a[3]"
+                ],
+                [
+                    "pierce/div.container a:nth-of-type(3)"
+                ],
+                [
+                    "text/Cancel Service"
+                ]
+            ],
+            "offsetY": 15.90625,
+            "offsetX": 85.35415649414062,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Service/Cancel/5911a6a6-cb12-48a3-8055-604e3c21fcdf?impersonateid=73e8e99c-e1d4-4608-bc20-e1a492da45b0",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#CancellationReason"
+                ],
+                [
+                    "xpath///*[@id=\"CancellationReason\"]"
+                ],
+                [
+                    "pierce/#CancellationReason"
+                ]
+            ],
+            "offsetY": 14.604156494140625,
+            "offsetX": 223.6666660308838
+        },
+        {
+            "type": "change",
+            "value": "USING ANOTHER FNO",
+            "selectors": [
+                [
+                    "#CancellationReason"
+                ],
+                [
+                    "xpath///*[@id=\"CancellationReason\"]"
+                ],
+                [
+                    "pierce/#CancellationReason"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/200 Characters Allowed"
+                ],
+                [
+                    "#CancellationComment"
+                ],
+                [
+                    "xpath///*[@id=\"CancellationComment\"]"
+                ],
+                [
+                    "pierce/#CancellationComment"
+                ]
+            ],
+            "offsetY": 29.895828247070312,
+            "offsetX": 196.6666660308838
+        },
+        {
+            "type": "change",
+            "value": "Bot cancellation",
+            "selectors": [
+                [
+                    "aria/200 Characters Allowed"
+                ],
+                [
+                    "#CancellationComment"
+                ],
+                [
+                    "xpath///*[@id=\"CancellationComment\"]"
+                ],
+                [
+                    "pierce/#CancellationComment"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Confirm Cancellation"
+                ],
+                [
+                    "div > input"
+                ],
+                [
+                    "xpath//html/body/div[3]/div/div/div/div/form/div/input"
+                ],
+                [
+                    "pierce/div > input"
+                ],
+                [
+                    "text/Confirm Cancellation"
+                ]
+            ],
+            "offsetY": 13.33331298828125,
+            "offsetX": 119.66666603088379,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/Service/Info/5911a6a6-cb12-48a3-8055-604e3c21fcdf?impersonateid=73e8e99c-e1d4-4608-bc20-e1a492da45b0",
+                    "title": ""
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Work Orders",
+                    "aria/[role=\"generic\"]"
+                ],
+                [
+                    "#work-orders > span"
+                ],
+                [
+                    "xpath///*[@id=\"work-orders\"]/span"
+                ],
+                [
+                    "pierce/#work-orders > span"
+                ]
+            ],
+            "offsetY": 9.71875,
+            "offsetX": 10.208332061767578
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/20250805-367323147"
+                ],
+                [
+                    "dd:nth-of-type(1) > a"
+                ],
+                [
+                    "xpath///*[@id=\"ui-id-3\"]/dl/dd[1]/a"
+                ],
+                [
+                    "pierce/dd:nth-of-type(1) > a"
+                ],
+                [
+                    "text/20250805-367323147"
+                ]
+            ],
+            "offsetY": 8.822906494140625,
+            "offsetX": 51.80207824707031,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/WorkOrder/Item/91cbf92c-ccee-47e6-81fe-cc19e8ebb4ae",
+                    "title": "Manage Work Orders - Evotel"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Status[role=\"combobox\"]"
+                ],
+                [
+                    "#StatusId"
+                ],
+                [
+                    "xpath///*[@id=\"StatusId\"]"
+                ],
+                [
+                    "pierce/#StatusId"
+                ],
+                [
+                    "text/48572406-cd18-43ed-ba35-df91291c4486"
+                ]
+            ],
+            "offsetY": 8.447914123535156,
+            "offsetX": 190.6666660308838
+        },
+        {
+            "type": "change",
+            "value": "c14c051e-d259-426f-a2b1-e869e5300bcc",
+            "selectors": [
+                [
+                    "aria/Status[role=\"combobox\"]"
+                ],
+                [
+                    "#StatusId"
+                ],
+                [
+                    "xpath///*[@id=\"StatusId\"]"
+                ],
+                [
+                    "pierce/#StatusId"
+                ],
+                [
+                    "text/48572406-cd18-43ed-ba35-df91291c4486"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Comments[role=\"textbox\"]"
+                ],
+                [
+                    "#Comments"
+                ],
+                [
+                    "xpath///*[@id=\"Comments\"]"
+                ],
+                [
+                    "pierce/#Comments"
+                ]
+            ],
+            "offsetY": 28.322906494140625,
+            "offsetX": 153.6666660308838
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Shift"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Shift"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Shift"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Shift"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Shift"
+        },
+        {
+            "type": "keyUp",
+            "key": "Shift",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Bot cancellation",
+            "selectors": [
+                [
+                    "aria/Comments[role=\"textbox\"]"
+                ],
+                [
+                    "#Comments"
+                ],
+                [
+                    "xpath///*[@id=\"Comments\"]"
+                ],
+                [
+                    "pierce/#Comments"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/No user notification No user notification"
+                ],
+                [
+                    "#NoUserNotification"
+                ],
+                [
+                    "xpath///*[@id=\"NoUserNotification\"]"
+                ],
+                [
+                    "pierce/#NoUserNotification"
+                ]
+            ],
+            "offsetY": 4.71875,
+            "offsetX": 3.666666030883789
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Submit"
+                ],
+                [
+                    "#btnSubmit"
+                ],
+                [
+                    "xpath///*[@id=\"btnSubmit\"]"
+                ],
+                [
+                    "pierce/#btnSubmit"
+                ],
+                [
+                    "text/Submit"
+                ]
+            ],
+            "offsetY": 21.197906494140625,
+            "offsetX": 52.15625,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://my.evotel.co.za/WorkOrder/Item/91cbf92c-ccee-47e6-81fe-cc19e8ebb4ae?success=0&message=Work%20Order%20Updated",
+                    "title": "Manage Work Orders - Evotel"
+                }
+            ]
+        }
+    ]
+}

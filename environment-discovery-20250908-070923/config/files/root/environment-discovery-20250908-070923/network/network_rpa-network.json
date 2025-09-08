@@ -1,0 +1,28 @@
+# Network details for rpa-network
+# Command: podman network inspect rpa-network
+# Generated: Mon Sep  8 07:09:26 UTC 2025
+
+[
+     {
+          "name": "rpa-network",
+          "id": "b9440b629007cc680a16f1d85ea497e937c89fd1601445f53c93f755c26c5ed7",
+          "driver": "bridge",
+          "network_interface": "podman1",
+          "created": "2025-09-02T08:32:21.005324913Z",
+          "subnets": [
+               {
+                    "subnet": "172.18.0.0/16",
+                    "gateway": "172.18.0.1"
+               }
+          ],
+          "ipv6_enabled": false,
+          "internal": false,
+          "dns_enabled": true,
+          "ipam_options": {
+               "driver": "host-local"
+          },
+          "containers": {}
+     }
+]
+
+

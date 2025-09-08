@@ -1,0 +1,23 @@
+# System hostname and OS info
+# Command: hostnamectl
+# Generated: Mon Sep  8 07:09:23 UTC 2025
+
+ Static hostname: ip-172-31-32-238.af-south-1.compute.internal
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: ec29062e69c05dc8864710f69658138b
+         Boot ID: 173446e4a0e64048b9857e81f337d98e
+    Product UUID: ec29062e-69c0-5dc8-8647-10f69658138b
+  Virtualization: amazon
+Operating System: Red Hat Enterprise Linux 10.0 (Coughlan)
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:10.0
+          Kernel: Linux 6.12.0-55.29.1.el10_0.x86_64
+    Architecture: x86-64
+ Hardware Vendor: Amazon EC2
+  Hardware Model: t3.medium
+ Hardware Serial: ec29062e-69c0-5dc8-8647-10f69658138b
+Firmware Version: 1.0
+   Firmware Date: Mon 2017-10-16
+    Firmware Age: 7y 10month 3w 2d
+
+

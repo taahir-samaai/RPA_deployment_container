@@ -1,0 +1,13 @@
+# Podman version
+# Command: podman version
+# Generated: Mon Sep  8 07:09:23 UTC 2025
+
+Client:        Podman Engine
+Version:       5.4.0
+API Version:   5.4.0
+Go Version:    go1.23.10 (Red Hat 1.23.10-1.el10_0)
+Built:         Wed Jun 25 00:00:00 2025
+Build Origin:  Red Hat, Inc. <http://bugzilla.redhat.com/bugzilla>
+OS/Arch:       linux/amd64
+
+

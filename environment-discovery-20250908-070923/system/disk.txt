@@ -1,0 +1,17 @@
+# Disk usage
+# Command: df -h
+# Generated: Mon Sep  8 07:09:23 UTC 2025
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  9.8G  6.0G  3.8G  62% /
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           1.8G     0  1.8G   0% /dev/shm
+efivarfs        128K  3.8K  120K   4% /sys/firmware/efi/efivars
+tmpfs           715M  8.6M  707M   2% /run
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+/dev/nvme0n1p2  200M  8.4M  192M   5% /boot/efi
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyS0.service
+tmpfs           358M  4.0K  358M   1% /run/user/1000
+
+

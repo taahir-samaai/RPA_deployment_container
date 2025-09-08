@@ -1,0 +1,10 @@
+# All containers
+# Command: podman ps -a
+# Generated: Mon Sep  8 07:09:24 UTC 2025
+
+CONTAINER ID  IMAGE                              COMMAND               CREATED     STATUS                 PORTS                   NAMES
+f5e22f2e1313  localhost/rpa-worker:latest        python worker.py      3 days ago  Exited (0) 3 days ago  0.0.0.0:8621->8621/tcp  rpa-worker1
+d987ba521eb4  localhost/rpa-worker:latest        python worker.py      3 days ago  Exited (0) 3 days ago  0.0.0.0:8622->8621/tcp  rpa-worker2
+1739fc8c8f85  localhost/rpa-orchestrator:latest  python orchestrat...  3 days ago  Exited (0) 3 days ago  0.0.0.0:8620->8620/tcp  rpa-orchestrator
+
+

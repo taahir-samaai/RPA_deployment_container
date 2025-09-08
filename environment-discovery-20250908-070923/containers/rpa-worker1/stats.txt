@@ -1,0 +1,8 @@
+# Resource stats for rpa-worker1
+# Command: podman stats --no-stream rpa-worker1 2>/dev/null || echo 'Container not running'
+# Generated: Mon Sep  8 07:09:25 UTC 2025
+
+ID            NAME         CPU %       MEM USAGE / LIMIT  MEM %       NET IO      BLOCK IO    PIDS        CPU TIME    AVG CPU %
+f5e22f2e1313  rpa-worker1  0.00%       0B / 0B            0.00%       0B / 0B     0B / 0B     0           0s          0.00%
+
+

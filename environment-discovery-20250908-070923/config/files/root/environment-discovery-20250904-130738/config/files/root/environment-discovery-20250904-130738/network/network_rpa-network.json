@@ -1,0 +1,57 @@
+# Network details for rpa-network
+# Command: podman network inspect rpa-network
+# Generated: Thu Sep  4 13:07:41 UTC 2025
+
+[
+     {
+          "name": "rpa-network",
+          "id": "b9440b629007cc680a16f1d85ea497e937c89fd1601445f53c93f755c26c5ed7",
+          "driver": "bridge",
+          "network_interface": "podman1",
+          "created": "2025-09-02T08:32:21.005324913Z",
+          "subnets": [
+               {
+                    "subnet": "172.18.0.0/16",
+                    "gateway": "172.18.0.1"
+               }
+          ],
+          "ipv6_enabled": false,
+          "internal": false,
+          "dns_enabled": true,
+          "ipam_options": {
+               "driver": "host-local"
+          },
+          "containers": {
+               "d987ba521eb4e9d5b90ed35c42a956fdc5b590205fa3570f223d23b6d2226ccb": {
+                    "name": "rpa-worker2",
+                    "interfaces": {
+                         "eth0": {
+                              "subnets": [
+                                   {
+                                        "ipnet": "172.18.0.4/16",
+                                        "gateway": "172.18.0.1"
+                                   }
+                              ],
+                              "mac_address": "8e:3a:26:a6:29:d9"
+                         }
+                    }
+               },
+               "f5e22f2e1313a52032da777df6fa2d35028922c3f98df71ce30b7ed67d030fc8": {
+                    "name": "rpa-worker1",
+                    "interfaces": {
+                         "eth0": {
+                              "subnets": [
+                                   {
+                                        "ipnet": "172.18.0.3/16",
+                                        "gateway": "172.18.0.1"
+                                   }
+                              ],
+                              "mac_address": "b6:fd:1f:62:d1:a2"
+                         }
+                    }
+               }
+          }
+     }
+]
+
+

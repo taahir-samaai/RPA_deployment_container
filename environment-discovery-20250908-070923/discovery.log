@@ -1,0 +1,124 @@
+2025-09-08 07:09:23 - INFO: Created discovery directory: /root/environment-discovery-20250908-070923
+2025-09-08 07:09:23 - SECTION: SYSTEM INFORMATION
+2025-09-08 07:09:23 - INFO: Capturing: System hostname and OS info
+2025-09-08 07:09:23 - SUCCESS: Captured: System hostname and OS info
+2025-09-08 07:09:23 - INFO: Capturing: Kernel information
+2025-09-08 07:09:23 - SUCCESS: Captured: Kernel information
+2025-09-08 07:09:23 - INFO: Capturing: CPU information
+2025-09-08 07:09:23 - SUCCESS: Captured: CPU information
+2025-09-08 07:09:23 - INFO: Capturing: Memory information
+2025-09-08 07:09:23 - SUCCESS: Captured: Memory information
+2025-09-08 07:09:23 - INFO: Capturing: Disk usage
+2025-09-08 07:09:23 - SUCCESS: Captured: Disk usage
+2025-09-08 07:09:23 - INFO: Capturing: Block devices
+2025-09-08 07:09:23 - SUCCESS: Captured: Block devices
+2025-09-08 07:09:23 - INFO: Capturing: Current user information
+2025-09-08 07:09:23 - SUCCESS: Captured: Current user information
+2025-09-08 07:09:23 - INFO: Capturing: OS release
+2025-09-08 07:09:23 - SUCCESS: Captured: OS release
+2025-09-08 07:09:23 - INFO: Capturing: Container-related packages
+2025-09-08 07:09:23 - SUCCESS: Captured: Container-related packages
+2025-09-08 07:09:23 - SECTION: PODMAN SYSTEM INFORMATION
+2025-09-08 07:09:23 - INFO: Capturing: Podman version
+2025-09-08 07:09:24 - SUCCESS: Captured: Podman version
+2025-09-08 07:09:24 - INFO: Capturing: Podman system info
+2025-09-08 07:09:24 - SUCCESS: Captured: Podman system info
+2025-09-08 07:09:24 - INFO: Capturing: Podman disk usage
+2025-09-08 07:09:24 - SUCCESS: Captured: Podman disk usage
+2025-09-08 07:09:24 - SECTION: CONTAINER INFORMATION
+2025-09-08 07:09:24 - INFO: Capturing: All containers
+2025-09-08 07:09:24 - SUCCESS: Captured: All containers
+2025-09-08 07:09:24 - INFO: Capturing: Containers formatted table
+2025-09-08 07:09:24 - SUCCESS: Captured: Containers formatted table
+2025-09-08 07:09:24 - INFO: Found RPA containers: rpa-worker1
+rpa-worker2
+rpa-orchestrator
+2025-09-08 07:09:24 - INFO: Processing container: rpa-worker1
+2025-09-08 07:09:24 - INFO: Capturing: Container inspection for rpa-worker1
+2025-09-08 07:09:24 - SUCCESS: Captured: Container inspection for rpa-worker1
+2025-09-08 07:09:24 - INFO: Capturing: Environment variables for rpa-worker1
+2025-09-08 07:09:25 - SUCCESS: Captured: Environment variables for rpa-worker1
+2025-09-08 07:09:25 - INFO: Capturing: Processes in rpa-worker1
+2025-09-08 07:09:25 - SUCCESS: Captured: Processes in rpa-worker1
+2025-09-08 07:09:25 - INFO: Capturing: Recent logs for rpa-worker1
+2025-09-08 07:09:25 - SUCCESS: Captured: Recent logs for rpa-worker1
+2025-09-08 07:09:25 - INFO: Capturing: Resource stats for rpa-worker1
+2025-09-08 07:09:25 - SUCCESS: Captured: Resource stats for rpa-worker1
+2025-09-08 07:09:25 - INFO: Processing container: rpa-worker2
+2025-09-08 07:09:25 - INFO: Capturing: Container inspection for rpa-worker2
+2025-09-08 07:09:25 - SUCCESS: Captured: Container inspection for rpa-worker2
+2025-09-08 07:09:25 - INFO: Capturing: Environment variables for rpa-worker2
+2025-09-08 07:09:25 - SUCCESS: Captured: Environment variables for rpa-worker2
+2025-09-08 07:09:25 - INFO: Capturing: Processes in rpa-worker2
+2025-09-08 07:09:25 - SUCCESS: Captured: Processes in rpa-worker2
+2025-09-08 07:09:25 - INFO: Capturing: Recent logs for rpa-worker2
+2025-09-08 07:09:25 - SUCCESS: Captured: Recent logs for rpa-worker2
+2025-09-08 07:09:25 - INFO: Capturing: Resource stats for rpa-worker2
+2025-09-08 07:09:25 - SUCCESS: Captured: Resource stats for rpa-worker2
+2025-09-08 07:09:25 - INFO: Processing container: rpa-orchestrator
+2025-09-08 07:09:25 - INFO: Capturing: Container inspection for rpa-orchestrator
+2025-09-08 07:09:25 - SUCCESS: Captured: Container inspection for rpa-orchestrator
+2025-09-08 07:09:25 - INFO: Capturing: Environment variables for rpa-orchestrator
+2025-09-08 07:09:25 - SUCCESS: Captured: Environment variables for rpa-orchestrator
+2025-09-08 07:09:25 - INFO: Capturing: Processes in rpa-orchestrator
+2025-09-08 07:09:25 - SUCCESS: Captured: Processes in rpa-orchestrator
+2025-09-08 07:09:25 - INFO: Capturing: Recent logs for rpa-orchestrator
+2025-09-08 07:09:25 - SUCCESS: Captured: Recent logs for rpa-orchestrator
+2025-09-08 07:09:25 - INFO: Capturing: Resource stats for rpa-orchestrator
+2025-09-08 07:09:25 - SUCCESS: Captured: Resource stats for rpa-orchestrator
+2025-09-08 07:09:25 - SECTION: IMAGES INFORMATION
+2025-09-08 07:09:25 - INFO: Capturing: All images
+2025-09-08 07:09:25 - SUCCESS: Captured: All images
+2025-09-08 07:09:25 - INFO: Capturing: Images formatted table
+2025-09-08 07:09:25 - SUCCESS: Captured: Images formatted table
+2025-09-08 07:09:26 - INFO: Capturing: Build history for localhost/rpa-worker:latest
+2025-09-08 07:09:26 - SUCCESS: Captured: Build history for localhost/rpa-worker:latest
+2025-09-08 07:09:26 - INFO: Capturing: Build history for localhost/rpa-orchestrator:latest
+2025-09-08 07:09:26 - SUCCESS: Captured: Build history for localhost/rpa-orchestrator:latest
+2025-09-08 07:09:26 - SECTION: NETWORK INFORMATION
+2025-09-08 07:09:26 - INFO: Capturing: Podman networks
+2025-09-08 07:09:26 - SUCCESS: Captured: Podman networks
+2025-09-08 07:09:26 - INFO: Capturing: Network details for podman
+2025-09-08 07:09:26 - SUCCESS: Captured: Network details for podman
+2025-09-08 07:09:26 - INFO: Capturing: Network details for rpa-network
+2025-09-08 07:09:26 - SUCCESS: Captured: Network details for rpa-network
+2025-09-08 07:09:26 - INFO: Capturing: IP addresses
+2025-09-08 07:09:26 - SUCCESS: Captured: IP addresses
+2025-09-08 07:09:26 - INFO: Capturing: Network routes
+2025-09-08 07:09:26 - SUCCESS: Captured: Network routes
+2025-09-08 07:09:26 - INFO: Capturing: Listening ports
+2025-09-08 07:09:26 - SUCCESS: Captured: Listening ports
+2025-09-08 07:09:26 - SECTION: VOLUMES AND STORAGE
+2025-09-08 07:09:26 - INFO: Capturing: Podman volumes
+2025-09-08 07:09:26 - SUCCESS: Captured: Podman volumes
+2025-09-08 07:09:26 - INFO: Analyzing mount points...
+2025-09-08 07:09:26 - SECTION: CONFIGURATION FILES DISCOVERY
+2025-09-08 07:09:26 - INFO: Searching for RPA configuration files...
+2025-09-08 07:09:26 - INFO: Searching directory: /opt/rpa-system
+2025-09-08 07:09:26 - INFO: Searching directory: /root
+2025-09-08 07:09:26 - INFO: Copying configuration files...
+2025-09-08 07:09:27 - SECTION: BUILD CONTEXT DISCOVERY
+2025-09-08 07:09:27 - INFO: Searching for source code and build context...
+2025-09-08 07:09:27 - INFO: Searching in: /opt/rpa-system
+2025-09-08 07:09:27 - INFO: Searching in: /root
+2025-09-08 07:09:27 - SECTION: SYSTEMD SERVICES
+2025-09-08 07:09:27 - INFO: Capturing: RPA systemd services
+2025-09-08 07:09:27 - SUCCESS: Captured: RPA systemd services
+2025-09-08 07:09:27 - INFO: Capturing: Container-related services
+2025-09-08 07:09:27 - SUCCESS: Captured: Container-related services
+2025-09-08 07:09:27 - SECTION: FIREWALL AND SECURITY
+2025-09-08 07:09:27 - INFO: Capturing: Firewall configuration
+2025-09-08 07:09:27 - SUCCESS: Captured: Firewall configuration
+2025-09-08 07:09:27 - INFO: Capturing: SELinux enforcement mode
+2025-09-08 07:09:27 - SUCCESS: Captured: SELinux enforcement mode
+2025-09-08 07:09:27 - INFO: Capturing: SELinux status
+2025-09-08 07:09:27 - SUCCESS: Captured: SELinux status
+2025-09-08 07:09:27 - SECTION: RUNNING PROCESSES
+2025-09-08 07:09:27 - INFO: Capturing: RPA-related processes
+2025-09-08 07:09:27 - SUCCESS: Captured: RPA-related processes
+2025-09-08 07:09:27 - SECTION: GENERATING SUMMARY REPORT
+2025-09-08 07:09:27 - SUCCESS: Environment discovery completed!
+2025-09-08 07:09:27 - INFO: Discovery report saved to: /root/environment-discovery-20250908-070923
+2025-09-08 07:09:27 - INFO: Review the following key files:
+2025-09-08 07:09:27 - INFO:   - /root/environment-discovery-20250908-070923/ENVIRONMENT_SUMMARY.md
+2025-09-08 07:09:27 - INFO:   - /root/environment-discovery-20250908-070923/DEPLOYMENT_CHECKLIST.md

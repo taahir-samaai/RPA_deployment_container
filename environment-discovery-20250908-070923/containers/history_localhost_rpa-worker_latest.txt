@@ -1,0 +1,47 @@
+# Build history for localhost/rpa-worker:latest
+# Command: podman history localhost/rpa-worker:latest
+# Generated: Mon Sep  8 07:09:26 UTC 2025
+
+ID            CREATED      CREATED BY                                     SIZE                 COMMENT
+68e3a56cd88b  3 days ago   /bin/sh -c #(nop) CMD ["python", "worker.py"]  0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) HEALTHCHECK --interval=3...  0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) EXPOSE 8621                  0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) ENV DISABLE_DEV_SHM_USAG...  0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) ENV NO_SANDBOX=true          0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) ENV HEADLESS=true            0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) ENV CHROME_BIN=/usr/bin/...  0B                   
+<missing>     3 days ago   /bin/sh -c #(nop) ENV CHROMEDRIVER_PATH=/u...  0B                   
+<missing>     3 days ago   /bin/sh -c mkdir -p worker_data                2.56kB               
+786c13fd98a3  3 days ago   /bin/sh -c #(nop) COPY dir:7f87bf4d0052e1c...  20.1MB               
+80d1deb3fb86  3 days ago   /bin/sh -c #(nop) COPY dir:eecf5b74c8565b4...  759kB                
+a69a67c9312b  4 days ago   /bin/sh -c #(nop) COPY file:fcd8ae1890ca0c...  27.6kB               
+558330f86006  4 days ago   /bin/sh -c #(nop) COPY file:ec693844effc31...  7.17kB               
+2a90c30f3749  4 days ago   /bin/sh -c #(nop) COPY file:1927ff25846c35...  16.9kB               
+3c7e2f8c876c  4 days ago   /bin/sh -c #(nop) COPY file:c0dcb95618cdfd...  5.63kB               
+2635db57dedc  4 days ago   /bin/sh -c #(nop) COPY file:c2ffdf21db365c...  12.8kB               
+9f7c1304b112  4 days ago   /bin/sh -c #(nop) COPY file:343cef1be5af31...  15.9kB               
+e22423bc2486  5 days ago   /bin/sh -c #(nop) COPY file:c9f06a9198f0f4...  30.2kB               
+21e7255c77b1  5 days ago   /bin/sh -c pip install --user --no-cache-d...  135MB                
+fbc392d6dd74  5 days ago   /bin/sh -c #(nop) COPY file:ea55f229807a9d...  2.56kB               
+79a9152038e7  5 days ago   /bin/sh -c #(nop) WORKDIR /app                 0B                   
+<missing>     5 days ago   /bin/sh -c #(nop) USER rpauser                 0B                   
+<missing>     5 days ago   /bin/sh -c mkdir -p /app/data/db /app/data...  5.12kB               
+b9c7c1df44b7  5 days ago   /bin/sh -c useradd -m -u 1001 rpauser &&  ...  25.6kB               
+834668ce637b  5 days ago   /bin/sh -c chmod +x /usr/bin/google-chrome...  4.61kB               
+a9b643662f2c  5 days ago   /bin/sh -c #(nop) COPY dir:c3c4452fdc501dd...  387MB                
+f6531e52dd59  5 days ago   /bin/sh -c #(nop) COPY file:a203e6b0edbc1a...  18.5MB               
+6cb3e78ea1d0  5 days ago   /bin/sh -c #(nop) COPY file:159ca1ddddbc1c...  3.58kB               
+8bbe7a03335a  5 days ago   /bin/sh -c apt-get update &&     apt-get i...  674MB                
+2ba2e944f9cd  5 days ago   /bin/sh -c #(nop) USER root                    0B                   FROM docker.io/library/python:3.11-slim
+<missing>     4 weeks ago  CMD ["python3"]                                0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                       for src in idle3...  5.12kB              buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                                            savedAptMark="$...  44MB        buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PYTHON_SHA256=8fb5f9fbc7609fa822cb3154...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PYTHON_VERSION=3.11.13                     0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV GPG_KEY=A035C8C19219BA821ECEA86B64E628...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                       apt-get update; ...  4.12MB      buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV LANG=C.UTF-8                               0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PATH=/usr/local/bin:/usr/local/sbin:/u...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  # debian.sh --arch 'amd64' out/ 'trixie' '...  81MB                 debuerreotype 0.15
+
+

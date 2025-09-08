@@ -1,0 +1,311 @@
+# Container inspection for rpa-orchestrator
+# Command: podman inspect rpa-orchestrator
+# Generated: Thu Sep  4 13:07:40 UTC 2025
+
+[
+     {
+          "Id": "1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c",
+          "Created": "2025-09-04T11:30:00.77036254Z",
+          "Path": "python",
+          "Args": [
+               "orchestrator.py"
+          ],
+          "State": {
+               "OciVersion": "1.2.0",
+               "Status": "running",
+               "Running": true,
+               "Paused": false,
+               "Restarting": false,
+               "OOMKilled": false,
+               "Dead": false,
+               "Pid": 2261,
+               "ConmonPid": 2259,
+               "ExitCode": 0,
+               "Error": "",
+               "StartedAt": "2025-09-04T11:30:00.966035433Z",
+               "FinishedAt": "0001-01-01T00:00:00Z",
+               "CgroupPath": "/machine.slice/libpod-1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c.scope",
+               "CheckpointedAt": "0001-01-01T00:00:00Z",
+               "RestoredAt": "0001-01-01T00:00:00Z"
+          },
+          "Image": "d8bbfa4cc2aa50ccdd657d325bdaa336820fda8d069b21f0b1b740c47dcfb800",
+          "ImageDigest": "sha256:5fe7815cf7658806a84dfabb2aaf5e9c058031834fad0ad16ff7c5d4fcc9d7d9",
+          "ImageName": "localhost/rpa-orchestrator:latest",
+          "Rootfs": "",
+          "Pod": "",
+          "ResolvConfPath": "/run/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/resolv.conf",
+          "HostnamePath": "/run/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/hostname",
+          "HostsPath": "/run/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/hosts",
+          "StaticDir": "/var/lib/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata",
+          "OCIConfigPath": "/var/lib/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/config.json",
+          "OCIRuntime": "crun",
+          "ConmonPidFile": "/run/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/conmon.pid",
+          "PidFile": "/run/containers/storage/overlay-containers/1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c/userdata/pidfile",
+          "Name": "rpa-orchestrator",
+          "RestartCount": 0,
+          "Driver": "overlay",
+          "MountLabel": "system_u:object_r:container_file_t:s0:c223,c411",
+          "ProcessLabel": "system_u:system_r:container_t:s0:c223,c411",
+          "AppArmorProfile": "",
+          "EffectiveCaps": null,
+          "BoundingCaps": [
+               "CAP_CHOWN",
+               "CAP_DAC_OVERRIDE",
+               "CAP_FOWNER",
+               "CAP_FSETID",
+               "CAP_KILL",
+               "CAP_NET_BIND_SERVICE",
+               "CAP_SETFCAP",
+               "CAP_SETGID",
+               "CAP_SETPCAP",
+               "CAP_SETUID",
+               "CAP_SYS_CHROOT"
+          ],
+          "ExecIDs": [],
+          "GraphDriver": {
+               "Name": "overlay",
+               "Data": {
+                    "LowerDir": "/var/lib/containers/storage/overlay/5ca9536705016e91184b8173f096dab71a003f2d29b91af46d29429ed7dcfd82/diff:/var/lib/containers/storage/overlay/e6f657d8e25e8864260e3f71a4563b9585aed9f626d42f2766f236c8f0a8f223/diff:/var/lib/containers/storage/overlay/4029a8ec77afacdf7819c15f1bcfd183c7c2616b3239d1bad5e3e086777c4485/diff:/var/lib/containers/storage/overlay/173f22fbe969de74a113ce16fef967baa742fceba2baa1a7f0dbf2e56efd99cf/diff:/var/lib/containers/storage/overlay/65bc3a2592046f792ee02e8f70987062f9bea4613be12936f4fea7771ca2ada3/diff:/var/lib/containers/storage/overlay/0d4518a7a66420e6550a41d0838ee9adeb38e2f758e77553701e80dd9058d53d/diff:/var/lib/containers/storage/overlay/a2777edbb2beac05cc13b60c3094cbf339447e8289ccd31620a3c6df5ea6993e/diff:/var/lib/containers/storage/overlay/523b64371e25512b20223111281d3ea8771765c6e98e6b85822819bad7d03fce/diff:/var/lib/containers/storage/overlay/795a284d94f21bec0fd82ebb01a5865963b699d6bbf0f6cc6ce585bf3e76e6f1/diff:/var/lib/containers/storage/overlay/3d01306f474096e24a63254d778fd6a239604b0c509001fe6ee35cf3ab2caf7d/diff:/var/lib/containers/storage/overlay/912b388cd7247c4825ac79e905c843837c98f588e6eadb162c2c720b9bfe0b10/diff:/var/lib/containers/storage/overlay/ef2c86cb774f2f6c482da255c11e4e96aa4fa7bc2ef3e2670b2a41394bf67da8/diff:/var/lib/containers/storage/overlay/e0d0b1360a237b33abab5258bb5dfc0c5c760cd3c4502bd7bc54c0a3d721d529/diff:/var/lib/containers/storage/overlay/e355aa755b207aec9359096b22438f6d0189dff74540375c163da3f7123e2285/diff:/var/lib/containers/storage/overlay/9e13c0afb4cf38896cf0a1982c1632e3b4c9da356bfb04f9de5dd8450eccf1a3/diff:/var/lib/containers/storage/overlay/f411a8c601bc2ba0536fdffbeff47e3cbf33f104b0603be94a5ac54f7c2bee28/diff:/var/lib/containers/storage/overlay/2d069b4e7f9b947154bb87a24e95d98a105779d26d94a45e62305cd0e6259c9e/diff:/var/lib/containers/storage/overlay/e6a3842ebc7f5e41d8a38f19a0aa5ea56c255475695ac6682882420800cf5465/diff",
+                    "MergedDir": "/var/lib/containers/storage/overlay/e2c94667ac0428ea70b8906c0672804cc1c315fa3fd9d5da6203984e2da98f5d/merged",
+                    "UpperDir": "/var/lib/containers/storage/overlay/e2c94667ac0428ea70b8906c0672804cc1c315fa3fd9d5da6203984e2da98f5d/diff",
+                    "WorkDir": "/var/lib/containers/storage/overlay/e2c94667ac0428ea70b8906c0672804cc1c315fa3fd9d5da6203984e2da98f5d/work"
+               }
+          },
+          "Mounts": [],
+          "Dependencies": [],
+          "NetworkSettings": {
+               "EndpointID": "",
+               "Gateway": "10.88.0.1",
+               "IPAddress": "10.88.0.2",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "ce:2d:88:4f:4c:4a",
+               "Bridge": "",
+               "SandboxID": "",
+               "HairpinMode": false,
+               "LinkLocalIPv6Address": "",
+               "LinkLocalIPv6PrefixLen": 0,
+               "Ports": {
+                    "8620/tcp": [
+                         {
+                              "HostIp": "0.0.0.0",
+                              "HostPort": "8620"
+                         }
+                    ]
+               },
+               "SandboxKey": "/run/netns/netns-88291025-82c9-5167-ff70-70ce426c3c2c",
+               "Networks": {
+                    "podman": {
+                         "EndpointID": "",
+                         "Gateway": "10.88.0.1",
+                         "IPAddress": "10.88.0.2",
+                         "IPPrefixLen": 16,
+                         "IPv6Gateway": "",
+                         "GlobalIPv6Address": "",
+                         "GlobalIPv6PrefixLen": 0,
+                         "MacAddress": "ce:2d:88:4f:4c:4a",
+                         "NetworkID": "2f259bab93aaaaa2542ba43ef33eb990d0999ee1b9924b557b7be53c0b7a1bb9",
+                         "DriverOpts": null,
+                         "IPAMConfig": null,
+                         "Links": null,
+                         "Aliases": [
+                              "1739fc8c8f85"
+                         ]
+                    }
+               }
+          },
+          "Namespace": "",
+          "IsInfra": false,
+          "IsService": false,
+          "KubeExitCodePropagation": "invalid",
+          "lockNumber": 0,
+          "Config": {
+               "Hostname": "1739fc8c8f85",
+               "Domainname": "",
+               "User": "rpauser",
+               "AttachStdin": false,
+               "AttachStdout": false,
+               "AttachStderr": false,
+               "Tty": false,
+               "OpenStdin": false,
+               "StdinOnce": false,
+               "Env": [
+                    "LOG_LEVEL=DEBUG",
+                    "WORKER_ENDPOINTS=[\"http://host.containers.internal:8621/execute\", \"http://host.containers.internal:8622/execute\"]",
+                    "container=podman",
+                    "LANG=C.UTF-8",
+                    "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                    "PYTHON_VERSION=3.11.13",
+                    "PYTHON_SHA256=8fb5f9fbc7609fa822cb31549884575db7fd9657cbffb89510b5d7975963a83a",
+                    "ORCHESTRATOR_HOST=0.0.0.0",
+                    "ORCHESTRATOR_PORT=8620",
+                    "CALLBACK_ENDPOINT=http://host.containers.internal:8080",
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "HOME=/home/rpauser",
+                    "HOSTNAME=1739fc8c8f85"
+               ],
+               "Cmd": [
+                    "python",
+                    "orchestrator.py"
+               ],
+               "Image": "localhost/rpa-orchestrator:latest",
+               "Volumes": null,
+               "WorkingDir": "/app",
+               "Entrypoint": null,
+               "OnBuild": null,
+               "Labels": {
+                    "io.buildah.version": "1.39.4"
+               },
+               "Annotations": {
+                    "io.container.manager": "libpod",
+                    "org.opencontainers.image.stopSignal": "15",
+                    "org.systemd.property.KillSignal": "15",
+                    "org.systemd.property.TimeoutStopUSec": "uint64 10000000"
+               },
+               "StopSignal": "SIGTERM",
+               "HealthcheckOnFailureAction": "none",
+               "HealthLogDestination": "local",
+               "HealthcheckMaxLogCount": 5,
+               "HealthcheckMaxLogSize": 500,
+               "CreateCommand": [
+                    "podman",
+                    "run",
+                    "-d",
+                    "--name",
+                    "rpa-orchestrator",
+                    "-p",
+                    "8620:8620",
+                    "-e",
+                    "CALLBACK_ENDPOINT=http://host.containers.internal:8080",
+                    "-e",
+                    "LOG_LEVEL=DEBUG",
+                    "-e",
+                    "ORCHESTRATOR_HOST=0.0.0.0",
+                    "-e",
+                    "ORCHESTRATOR_PORT=8620",
+                    "-e",
+                    "WORKER_ENDPOINTS=[\"http://host.containers.internal:8621/execute\", \"http://host.containers.internal:8622/execute\"]",
+                    "localhost/rpa-orchestrator:latest"
+               ],
+               "Umask": "0022",
+               "Timeout": 0,
+               "StopTimeout": 10,
+               "Passwd": true,
+               "sdNotifyMode": "container",
+               "ExposedPorts": {
+                    "8620/tcp": {}
+               }
+          },
+          "HostConfig": {
+               "Binds": [],
+               "CgroupManager": "systemd",
+               "CgroupMode": "private",
+               "ContainerIDFile": "",
+               "LogConfig": {
+                    "Type": "journald",
+                    "Config": null,
+                    "Path": "",
+                    "Tag": "",
+                    "Size": "0B"
+               },
+               "NetworkMode": "bridge",
+               "PortBindings": {
+                    "8620/tcp": [
+                         {
+                              "HostIp": "0.0.0.0",
+                              "HostPort": "8620"
+                         }
+                    ]
+               },
+               "RestartPolicy": {
+                    "Name": "no",
+                    "MaximumRetryCount": 0
+               },
+               "AutoRemove": false,
+               "AutoRemoveImage": false,
+               "Annotations": {
+                    "io.container.manager": "libpod",
+                    "org.opencontainers.image.stopSignal": "15",
+                    "org.systemd.property.KillSignal": "15",
+                    "org.systemd.property.TimeoutStopUSec": "uint64 10000000"
+               },
+               "VolumeDriver": "",
+               "VolumesFrom": null,
+               "CapAdd": [],
+               "CapDrop": [],
+               "Dns": [],
+               "DnsOptions": [],
+               "DnsSearch": [],
+               "ExtraHosts": [],
+               "HostsFile": "",
+               "GroupAdd": [],
+               "IpcMode": "shareable",
+               "Cgroup": "",
+               "Cgroups": "default",
+               "Links": null,
+               "OomScoreAdj": 0,
+               "PidMode": "private",
+               "Privileged": false,
+               "PublishAllPorts": false,
+               "ReadonlyRootfs": false,
+               "SecurityOpt": [],
+               "Tmpfs": {},
+               "UTSMode": "private",
+               "UsernsMode": "",
+               "ShmSize": 65536000,
+               "Runtime": "oci",
+               "ConsoleSize": [
+                    0,
+                    0
+               ],
+               "Isolation": "",
+               "CpuShares": 0,
+               "Memory": 0,
+               "NanoCpus": 0,
+               "CgroupParent": "",
+               "BlkioWeight": 0,
+               "BlkioWeightDevice": null,
+               "BlkioDeviceReadBps": null,
+               "BlkioDeviceWriteBps": null,
+               "BlkioDeviceReadIOps": null,
+               "BlkioDeviceWriteIOps": null,
+               "CpuPeriod": 0,
+               "CpuQuota": 0,
+               "CpuRealtimePeriod": 0,
+               "CpuRealtimeRuntime": 0,
+               "CpusetCpus": "",
+               "CpusetMems": "",
+               "Devices": [],
+               "DiskQuota": 0,
+               "KernelMemory": 0,
+               "MemoryReservation": 0,
+               "MemorySwap": 0,
+               "MemorySwappiness": 0,
+               "OomKillDisable": false,
+               "PidsLimit": 2048,
+               "Ulimits": [
+                    {
+                         "Name": "RLIMIT_NOFILE",
+                         "Soft": 1048576,
+                         "Hard": 1048576
+                    },
+                    {
+                         "Name": "RLIMIT_NPROC",
+                         "Soft": 1048576,
+                         "Hard": 1048576
+                    }
+               ],
+               "CpuCount": 0,
+               "CpuPercent": 0,
+               "IOMaximumIOps": 0,
+               "IOMaximumBandwidth": 0,
+               "CgroupConf": null
+          },
+          "UseImageHosts": false,
+          "UseImageHostname": false
+     }
+]
+
+

@@ -1,0 +1,11 @@
+# Listening ports
+# Command: ss -tuln
+# Generated: Mon Sep  8 07:09:26 UTC 2025
+
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:Port
+udp   UNCONN 0      0          127.0.0.1:323       0.0.0.0:*   
+udp   UNCONN 0      0              [::1]:323          [::]:*   
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*   
+tcp   LISTEN 0      128             [::]:22           [::]:*   
+
+

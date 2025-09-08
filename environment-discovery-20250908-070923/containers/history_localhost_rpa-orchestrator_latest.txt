@@ -1,0 +1,37 @@
+# Build history for localhost/rpa-orchestrator:latest
+# Command: podman history localhost/rpa-orchestrator:latest
+# Generated: Mon Sep  8 07:09:26 UTC 2025
+
+ID            CREATED      CREATED BY                                     SIZE                 COMMENT
+9f70dae669b4  4 days ago   /bin/sh -c #(nop) CMD ["python", "orchestr...  0B                   
+<missing>     4 days ago   /bin/sh -c #(nop) HEALTHCHECK --interval=3...  0B                   
+<missing>     4 days ago   /bin/sh -c #(nop) EXPOSE 8620                  0B                   
+<missing>     4 days ago   /bin/sh -c mkdir -p data/db data/logs data...  4.61kB               
+2c78de81c080  4 days ago   /bin/sh -c #(nop) COPY file:83b7756f4b368f...  13.3kB               
+faef041224bf  4 days ago   /bin/sh -c #(nop) COPY file:fa6cf567d852b4...  7.68kB               
+6d3eb994b5a0  4 days ago   /bin/sh -c #(nop) COPY file:1927ff25846c35...  16.9kB               
+3e899dfdf8f9  4 days ago   /bin/sh -c #(nop) COPY file:c0dcb95618cdfd...  5.63kB               
+986b75ba92bb  4 days ago   /bin/sh -c #(nop) COPY file:c2ffdf21db365c...  12.8kB               
+b0da87db7f6f  4 days ago   /bin/sh -c #(nop) COPY file:072db926e81c25...  28.2kB               
+ea27ece04ff7  4 days ago   /bin/sh -c #(nop) COPY file:0a466d80fa99f1...  9.73kB               
+97a98296ab42  4 days ago   /bin/sh -c #(nop) COPY file:343cef1be5af31...  15.9kB               
+a5955cc0c75a  5 days ago   /bin/sh -c #(nop) COPY file:0e28ae2e6d4fe0...  121kB                
+3d2006bf475a  5 days ago   /bin/sh -c pip install --user --no-cache-d...  135MB                
+d24ce9c11b5f  5 days ago   /bin/sh -c #(nop) COPY file:ea55f229807a9d...  2.56kB               
+a4cef2bef4d0  5 days ago   /bin/sh -c #(nop) WORKDIR /app                 0B                   
+<missing>     5 days ago   /bin/sh -c #(nop) USER rpauser                 0B                   
+<missing>     5 days ago   /bin/sh -c useradd -m -u 1001 rpauser &&  ...  21.5kB               
+fc43e7423d28  5 days ago   /bin/sh -c apt-get update &&     apt-get i...  214MB                
+2ba2e944f9cd  5 days ago   /bin/sh -c #(nop) USER root                    0B                   FROM docker.io/library/python:3.11-slim
+<missing>     4 weeks ago  CMD ["python3"]                                0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                       for src in idle3...  5.12kB              buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                                            savedAptMark="$...  44MB        buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PYTHON_SHA256=8fb5f9fbc7609fa822cb3154...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PYTHON_VERSION=3.11.13                     0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV GPG_KEY=A035C8C19219BA821ECEA86B64E628...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  RUN /bin/sh -c set -eux;                       apt-get update; ...  4.12MB      buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV LANG=C.UTF-8                               0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  ENV PATH=/usr/local/bin:/usr/local/sbin:/u...  0B                   buildkit.dockerfile.v0
+<missing>     4 weeks ago  # debian.sh --arch 'amd64' out/ 'trixie' '...  81MB                 debuerreotype 0.15
+
+

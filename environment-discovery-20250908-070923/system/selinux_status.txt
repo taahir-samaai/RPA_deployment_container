@@ -1,0 +1,16 @@
+# SELinux status
+# Command: sestatus 2>/dev/null || echo 'SELinux not available'
+# Generated: Mon Sep  8 07:09:27 UTC 2025
+
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Memory protection checking:     actual (secure)
+Max kernel policy version:      33
+
+

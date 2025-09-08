@@ -1,0 +1,10 @@
+# Containers formatted table
+# Command: podman ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'
+# Generated: Mon Sep  8 07:09:24 UTC 2025
+
+CONTAINER ID  NAMES             IMAGE                              STATUS                 PORTS
+f5e22f2e1313  rpa-worker1       localhost/rpa-worker:latest        Exited (0) 3 days ago  0.0.0.0:8621->8621/tcp
+d987ba521eb4  rpa-worker2       localhost/rpa-worker:latest        Exited (0) 3 days ago  0.0.0.0:8622->8621/tcp
+1739fc8c8f85  rpa-orchestrator  localhost/rpa-orchestrator:latest  Exited (0) 3 days ago  0.0.0.0:8620->8620/tcp
+
+

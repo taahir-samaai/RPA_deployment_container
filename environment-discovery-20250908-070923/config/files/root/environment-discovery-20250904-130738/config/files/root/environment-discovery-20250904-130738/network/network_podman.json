@@ -1,0 +1,43 @@
+# Network details for podman
+# Command: podman network inspect podman
+# Generated: Thu Sep  4 13:07:41 UTC 2025
+
+[
+     {
+          "name": "podman",
+          "id": "2f259bab93aaaaa2542ba43ef33eb990d0999ee1b9924b557b7be53c0b7a1bb9",
+          "driver": "bridge",
+          "network_interface": "podman0",
+          "created": "2025-09-04T13:07:41.68805697Z",
+          "subnets": [
+               {
+                    "subnet": "10.88.0.0/16",
+                    "gateway": "10.88.0.1"
+               }
+          ],
+          "ipv6_enabled": false,
+          "internal": false,
+          "dns_enabled": false,
+          "ipam_options": {
+               "driver": "host-local"
+          },
+          "containers": {
+               "1739fc8c8f85e03dd61571d262ce8e077dd205929613302462e57f48d9cfd37c": {
+                    "name": "rpa-orchestrator",
+                    "interfaces": {
+                         "eth0": {
+                              "subnets": [
+                                   {
+                                        "ipnet": "10.88.0.2/16",
+                                        "gateway": "10.88.0.1"
+                                   }
+                              ],
+                              "mac_address": "ce:2d:88:4f:4c:4a"
+                         }
+                    }
+               }
+          }
+     }
+]
+
+

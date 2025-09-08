@@ -1,0 +1,14 @@
+# All images
+# Command: podman images
+# Generated: Mon Sep  8 07:09:25 UTC 2025
+
+REPOSITORY                            TAG         IMAGE ID      CREATED      SIZE
+localhost/rpa-worker                  latest      633998b9251b  3 days ago   1.36 GB
+<none>                                <none>      08a843cf0aab  3 days ago   1.36 GB
+<none>                                <none>      d49f67c9caf0  4 days ago   1.36 GB
+<none>                                <none>      66254855e416  4 days ago   1.36 GB
+localhost/rpa-orchestrator            latest      d8bbfa4cc2aa  4 days ago   478 MB
+docker.io/selenium/standalone-chrome  latest      a500ac93adc0  3 weeks ago  2.04 GB
+docker.io/library/python              3.11-slim   2ba2e944f9cd  4 weeks ago  129 MB
+
+

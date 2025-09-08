@@ -1,0 +1,10 @@
+# Podman disk usage
+# Command: podman system df
+# Generated: Mon Sep  8 07:09:24 UTC 2025
+
+TYPE           TOTAL       ACTIVE      SIZE        RECLAIMABLE
+Images         84          2           3.819GB     3.819GB (100%)
+Containers     3           0           28.8MB      28.8MB (100%)
+Local Volumes  0           0           0B          0B (0%)
+
+

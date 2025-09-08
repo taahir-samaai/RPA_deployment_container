@@ -1,0 +1,33 @@
+=== Directory: /opt/rpa-system ===
+total 40
+drwxr-xr-x. 8 root root  4096 Sep  4 07:37 .
+drwxr-xr-x. 3 root root    24 Sep  2 06:57 ..
+drwxr-xr-x. 3 root root    17 Sep  4 07:37 backups
+drwxr-xr-x. 2 root root    48 Sep  2 08:37 configs
+drwxr-xr-x. 4 root root    40 Sep  2 08:05 containers
+-rw-r--r--. 1 root root   190 Sep  2 07:51 requirements.txt
+drwxr-xr-x. 9 root root  4096 Sep  4 07:59 rpa_botfarm
+drwxr-xr-x. 2 root root    99 Sep  3 07:11 scripts
+-rw-r--r--. 1 root root  2822 Sep  3 07:13 start-system.sh
+-rw-r--r--. 1 root root 10728 Sep  3 10:18 update_mfn_validation.py
+-rw-r--r--. 1 root root  8863 Sep  3 12:59 update_osn_validation.py
+drwxr-xr-x. 7 1001 1001    80 Sep  3 08:02 volumes
+
+=== Directory: /root ===
+total 588
+dr-xr-x---.  5 root root   4096 Sep  8 07:09 .
+dr-xr-xr-x. 19 root root    250 Sep  3 07:24 ..
+-rw-------.  1 root root  35736 Sep  5 13:37 .bash_history
+-rw-r--r--.  1 root root     18 Feb 12  2025 .bash_logout
+-rw-r--r--.  1 root root    141 Feb 12  2025 .bash_profile
+-rw-r--r--.  1 root root    429 Feb 12  2025 .bashrc
+-rw-r--r--.  1 root root    100 Feb 12  2025 .cshrc
+drwx------.  2 root root     29 Sep  2 06:36 .ssh
+-rw-r--r--.  1 root root    129 Feb 12  2025 .tcshrc
+-rw-r--r--.  1 root root   2996 Sep  5 10:17 CLEAN_DEPLOYMENT_README.md
+drwxr-xr-x.  9 root root   4096 Sep  5 10:17 environment-discovery-20250904-130738
+drwxr-xr-x.  8 root root    117 Sep  8 07:09 environment-discovery-20250908-070923
+-rw-r--r--.  1 root root 490519 Sep  5 10:17 rpa-clean-production-20250905-101751.tar.gz
+-rwxr-xr-x.  1 root root  16364 Sep  5 10:17 rpa_clean_packager.sh
+-rwxr-xr-x.  1 root root  20735 Sep  4 13:07 rpa_environment_discovery.sh
+

@@ -1,0 +1,2 @@
+/opt/rpa-system/volumes/worker2/data -> /app/data
+/opt/rpa-system/volumes/worker2/logs -> /app/logs

@@ -1,0 +1,6 @@
+# Recent logs for rpa-worker2
+# Command: podman logs --tail 100 rpa-worker2 2>/dev/null || echo 'No logs available'
+# Generated: Mon Sep  8 07:09:25 UTC 2025
+
+
+

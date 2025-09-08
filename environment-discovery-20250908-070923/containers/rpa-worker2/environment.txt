@@ -1,0 +1,7 @@
+# Environment variables for rpa-worker2
+# Command: podman exec rpa-worker2 env 2>/dev/null || echo 'Container not running or accessible'
+# Generated: Mon Sep  8 07:09:25 UTC 2025
+
+Container not running or accessible
+
+
