@@ -467,22 +467,30 @@ create_container_files() {
     # Create orchestrator Containerfile
     if [[ ! -f "$RPA_HOME/containers/orchestrator/Containerfile" ]]; then
         info "Creating orchestrator Containerfile..."
-        cat > $RPA_HOME/containers/orchestrator/Containerfile << 'EOF'
-FROM registry.redhat.io/ubi9/python-311:latest
+cat > containers/orchestrator/Containerfile << 'EOF'
+FROM python:3.12.9-slim
 
 USER root
-RUN dnf update -y && \
-    dnf install -y sqlite gcc python3-devel curl wget jq procps-ng && \
-    dnf clean all
 
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        sqlite3 gcc python3-dev curl wget jq procps \
+        build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create application user
 RUN useradd -m -u 1001 rpauser && mkdir -p /app && chown -R rpauser:rpauser /app
 
 USER rpauser
 WORKDIR /app
 
+# Install Python dependencies
 COPY requirements.txt ./
-RUN pip install --user --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir -r requirements.txt && pip cache purge
 
+# Copy application code
 COPY --chown=rpauser:rpauser . .
 RUN mkdir -p data/{db,logs,screenshots,evidence} logs temp
 
@@ -500,42 +508,43 @@ EOF
     # Create worker Containerfile
     if [[ ! -f "$RPA_HOME/containers/worker/Containerfile" ]]; then
         info "Creating worker Containerfile..."
-        cat > $RPA_HOME/containers/worker/Containerfile << 'EOF'
-FROM registry.redhat.io/ubi9/python-311:latest
+cat > /opt/rpa-system/containers/worker/Containerfile << 'EOF'
+FROM python:3.12.9-slim
 
 USER root
-RUN dnf update -y && \
-    dnf install -y chromium sqlite gcc python3-devel curl wget unzip jq procps-ng xvfb && \
-    dnf clean all
 
-RUN DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE") && \
-    wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip" && \
-    unzip /tmp/chromedriver.zip -d /tmp/ && \
-    mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver && \
-    rm -rf /tmp/chromedriver*
+# Install only absolutely essential packages
+RUN apt-get update && \
+    apt-get install -y curl wget gnupg && \
+    rm -rf /var/lib/apt/lists/*
 
+# Add Google's signing key and repository
+RUN curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+
+# Install Chrome (much smaller than selenium image)
+RUN apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create user
 RUN useradd -m -u 1001 rpauser && mkdir -p /app && chown -R rpauser:rpauser /app
 
 USER rpauser
 WORKDIR /app
 
+# Install minimal Python requirements
 COPY requirements.txt ./
-RUN pip install --user --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir selenium==4.15.2 fastapi==0.104.1 uvicorn[standard]==0.24.0 requests==2.31.0 && \
+    pip cache purge
 
 COPY --chown=rpauser:rpauser . .
-RUN mkdir -p data/{logs,screenshots,evidence} worker_data logs temp
 
 ENV PYTHONPATH=/app
-ENV PATH="${PATH}:/home/rpauser/.local/bin"
-ENV CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
-ENV CHROME_BINARY_PATH=/usr/bin/chromium-browser
+ENV CHROME_BINARY_PATH=/usr/bin/google-chrome
 ENV HEADLESS=true
 
 EXPOSE 8621
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -f http://localhost:8621/health || exit 1
-
 CMD ["python", "rpa_botfarm/worker.py"]
 EOF
     fi
