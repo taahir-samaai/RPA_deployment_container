@@ -189,6 +189,12 @@ install_prerequisites() {
     info "Updating system packages..."
     dnf update -y
 
+    info "Enabling CodeReady Builder (CRB) repo for dependencies..."
+    dnf config-manager --set-enabled crb || true
+
+    info "Installing EPEL repository..."
+    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
     info "Installing container and system packages..."
     dnf install -y \
         podman \
