@@ -568,111 +568,103 @@ create_management_scripts() {
 set -e
 cd /opt/rpa-system
 
-echo "Starting RPA System with Pod Architecture ($WORKER_COUNT workers)..."
+echo "🚀 Starting RPA System (5 Workers + 1 Orchestrator)..."
+
+# Cleanup old containers if they exist
+echo "🧹 Cleaning up old containers..."
+for name in rpa-orchestrator rpa-worker1 rpa-worker2 rpa-worker3 rpa-worker4 rpa-worker5; do
+    if sudo -u rpauser podman ps -a --format "{{.Names}}" | grep -q "^$name$"; then
+        echo "  - Removing existing container: $name"
+        sudo -u rpauser podman rm -f $name || true
+    fi
+done
+
+# Create network
+echo "🔗 Setting up network..."
+sudo -u rpauser ./scripts/create-network.sh
 
 # Set permissions
-echo "Setting permissions..."
+echo "🔐 Setting permissions..."
 chown -R rpauser:rpauser volumes/ || true
 
-# Build containers with optimized process
-echo "Building containers..."
-sudo -u rpauser podman build --tag rpa-orchestrator:latest --file containers/orchestrator/Containerfile .
-echo "Orchestrator build completed"
-
-sudo -u rpauser podman build --tag rpa-worker:latest --file containers/worker/Containerfile .
-echo "Worker build completed"
-
-# Create pod with dynamic port mapping
-echo "Creating RPA pod..."
-if sudo -u rpauser podman pod exists rpa-pod; then
-    echo "Removing existing pod..."
-    sudo -u rpauser podman pod rm -f rpa-pod
+# Build containers if they don't exist
+echo "🔨 Building containers..."
+if ! sudo -u rpauser podman image exists rpa-orchestrator:latest; then
+    sudo -u rpauser ./scripts/build-containers.sh
+else
+    echo "✅ Container images already exist"
 fi
 
-# Create pod with all required port mappings
-sudo -u rpauser podman pod create \\
-    --name rpa-pod \\
-    --network bridge \\
-    --publish 8620:8620 \\$(
-    for ((i=1; i<=WORKER_COUNT; i++)); do
-        port=$((8620 + i))
-        echo -n "    --publish $port:8621 \\"
-        echo ""
-    done
-)    --share net,ipc,uts
-
-# Start orchestrator in pod
-echo "Starting orchestrator in pod..."
-sudo -u rpauser podman run -d \\
-    --name rpa-orchestrator \\
-    --pod rpa-pod \\
-    --env-file configs/orchestrator.env \\
-    -v \$(pwd)/volumes/data:/app/data:Z \\
-    -v \$(pwd)/volumes/logs:/app/logs:Z \\
-    --restart unless-stopped \\
-    --memory=$ORCHESTRATOR_MEMORY \\
-    --cpus=2.0 \\
+# Start orchestrator (single-threaded)
+echo "📊 Starting orchestrator (single-threaded)..."
+sudo -u rpauser podman run -d \
+    --name rpa-orchestrator \
+    --hostname orchestrator \
+    --network rpa-network \
+    -p 8620:8620 \
+    --env-file configs/orchestrator.env \
+    -v $(pwd)/volumes/data:/app/data:U \
+    -v $(pwd)/volumes/logs:/app/logs:U \
+    --security-opt label=disable \
+    --restart unless-stopped \
+    --memory=1g \
+    --cpus=1.0 \
     rpa-orchestrator:latest
 
-echo "Waiting for orchestrator to start..."
+echo "⏳ Waiting for orchestrator to start..."
 sleep 15
 
-# Start workers in pod
-echo "Starting $WORKER_COUNT workers in pod..."
-for i in \$(seq 1 $WORKER_COUNT); do
-    echo "Starting worker \$i..."
-    sudo -u rpauser podman run -d \\
-        --name rpa-worker\$i \\
-        --pod rpa-pod \\
-        --env-file configs/worker.env \\
-        -v \$(pwd)/volumes/data:/app/data:Z \\
-        -v \$(pwd)/volumes/logs:/app/logs:Z \\
-        --restart unless-stopped \\
-        --memory=$WORKER_MEMORY \\
-        --cpus=1.0 \\
-        --security-opt seccomp=unconfined \\
-        --shm-size=512m \\
+# Start 5 workers (each single-threaded)
+for i in {1..5}; do
+    port=$((8620 + i))
+    echo "👷 Starting worker $i (single-threaded) on port $port..."
+    sudo -u rpauser podman run -d \
+        --name rpa-worker$i \
+        --hostname worker$i \
+        --network rpa-network \
+        -p $port:8621 \
+        --env-file configs/worker.env \
+        -v $(pwd)/volumes/data:/app/data:U \
+        -v $(pwd)/volumes/logs:/app/logs:U \
+        --security-opt label=disable \
+        --restart unless-stopped \
+        --memory=2g \
+        --cpus=1.0 \
+        --security-opt seccomp=unconfined \
+        --shm-size=1g \
         rpa-worker:latest
     
-    echo "Worker \$i started, waiting..."
+    echo "⏳ Waiting for worker $i to initialize..."
     sleep 5
 done
 
-echo "Waiting for all services to initialize..."
+echo "⏳ Waiting for all services to initialize..."
 sleep 20
 
-# Health checks for dynamic worker count
-echo "Checking service health..."
-if curl -f -s http://localhost:8620/health >/dev/null 2>&1; then
-    echo "  ✅ Orchestrator (port 8620): Healthy"
-else
-    echo "  ⚠️  Orchestrator (port 8620): Not responding"
-fi
-
-for i in \$(seq 1 $WORKER_COUNT); do
-    port=\$((8620 + i))
-    if curl -f -s http://localhost:\$port/health >/dev/null 2>&1; then
-        echo "  ✅ Worker \$i (port \$port): Healthy"
+# Health checks for all 6 services
+echo "🏥 Checking service health..."
+for port in 8620 8621 8622 8623 8624 8625; do
+    if curl -f -s http://localhost:$port/health >/dev/null 2>&1; then
+        echo "  ✅ Service on port $port: Healthy"
     else
-        echo "  ⚠️  Worker \$i (port \$port): Not responding"
+        echo "  ⚠️  Service on port $port: Not responding (may still be starting)"
     fi
 done
 
 echo ""
 echo "🎉 RPA System startup completed!"
-echo "📊 Architecture: 1 Orchestrator + $WORKER_COUNT Workers in Pod"
+echo ""
 echo "📊 Access Points:"
-echo "  🎛️  Orchestrator:    http://\$(hostname):8620"$(
-for ((i=1; i<=WORKER_COUNT; i++)); do
-    port=$((8620 + i))
-    echo ""
-    echo "echo \"  👷 Worker $i:        http://\$(hostname):$port\""
-done
-)
+echo "  🎛️  Orchestrator:    http://$(hostname):8620 (single-threaded)"
+echo "  👷 Worker 1:        http://$(hostname):8621 (single-threaded)"
+echo "  👷 Worker 2:        http://$(hostname):8622 (single-threaded)"
+echo "  👷 Worker 3:        http://$(hostname):8623 (single-threaded)"
+echo "  👷 Worker 4:        http://$(hostname):8624 (single-threaded)"
+echo "  👷 Worker 5:        http://$(hostname):8625 (single-threaded)"
 echo ""
 echo "🔑 Admin credentials:"
 echo "  Username: admin"
-echo "  Password: \$(cat /opt/rpa-system/.admin-password 2>/dev/null || echo 'Check /opt/rpa-system/.admin-password')"
+echo "  Password: $(cat /opt/rpa-system/.admin-password 2>/dev/null || echo 'Check /opt/rpa-system/.admin-password')"
 EOF
 
     # Create stop script for pod architecture
