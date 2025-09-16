@@ -1,0 +1,555 @@
+"""
+OSN Validation Automation - Container-Compatible Version
+========================================================
+Simplified and container-optimized for reliable headless operation
+"""
+
+import os
+import time
+import logging
+import traceback
+import json
+import base64
+from datetime import datetime
+from pathlib import Path
+from typing import Optional, List, Dict, Any
+from enum import Enum
+
+# Third-party imports
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import (
+    TimeoutException, NoSuchElementException, WebDriverException,
+    ElementNotInteractableException, ElementClickInterceptedException
+)
+from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type
+from pydantic import BaseModel, Field
+
+# Import configuration
+from config import Config
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    handlers=[logging.StreamHandler()]
+)
+logger = logging.getLogger(__name__)
+
+# ==================== ENUMERATIONS ====================
+
+class ValidationStatus(str, Enum):
+    PENDING = "pending"
+    IN_PROGRESS = "in_progress"
+    SUCCESS = "success"
+    FAILURE = "failure"
+    ERROR = "error"
+
+class SearchResult(str, Enum):
+    FOUND = "found"
+    NOT_FOUND = "not_found"
+    ERROR = "error"
+
+class OrderType(str, Enum):
+    NEW_INSTALLATION = "new_installation"
+    CEASE_ACTIVE_SERVICE = "cease_active_service"
+    MODIFICATION = "modification"
+    UNKNOWN = "unknown"
+
+# ==================== DATA MODELS ====================
+
+class ValidationRequest(BaseModel):
+    job_id: str = Field(..., description="Unique job identifier")
+    circuit_number: str = Field(..., description="Circuit number to validate")
+
+class ScreenshotData(BaseModel):
+    name: str
+    timestamp: datetime
+    data: str
+    path: str
+    
+    class Config:
+        json_encoders = {datetime: lambda v: v.isoformat()}
+
+class OrderData(BaseModel):
+    orderNumber: str
+    type: OrderType
+    orderStatus: str
+    dateImplemented: Optional[str] = None
+    is_new_installation: bool = False
+    is_cancellation: bool = False
+    is_implemented_cease: bool = False
+    is_pending_cease: bool = False
+    serviceNumber: Optional[str] = ""
+    externalRef: Optional[str] = ""
+    productName: Optional[str] = ""
+    createdOn: Optional[str] = ""
+
+class ValidationResult(BaseModel):
+    job_id: str
+    circuit_number: str
+    status: ValidationStatus
+    message: str
+    found: bool
+    orders: List[OrderData] = []
+    search_result: SearchResult
+    execution_time: Optional[float] = None
+    screenshots: List[ScreenshotData] = []
+    evidence_dir: Optional[str] = None
+
+# ==================== UTILITY FUNCTIONS ====================
+
+def robust_click(driver: webdriver.Chrome, element, description: str = "element") -> bool:
+    """Container-compatible click with multiple fallback strategies"""
+    methods = [
+        ("javascript click", lambda: driver.execute_script("arguments[0].click();", element)),
+        ("regular click", lambda: element.click()),
+        ("action chains click", lambda: ActionChains(driver).move_to_element(element).click().perform())
+    ]
+    
+    # Ensure element is in viewport
+    driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element)
+    time.sleep(2)  # Increased wait for container stability
+    
+    for method_name, method in methods:
+        try:
+            method()
+            logger.info(f"Successfully clicked {description} using {method_name}")
+            return True
+        except Exception as e:
+            logger.warning(f"{method_name} failed for {description}: {str(e)}")
+            continue
+    
+    logger.error(f"All click methods failed for {description}")
+    return False
+
+def robust_send_keys(driver: webdriver.Chrome, element, value: str, description: str = "field") -> bool:
+    """Container-compatible input with multiple strategies"""
+    methods = [
+        ("javascript fill", lambda: driver.execute_script(f"arguments[0].value = '{value}'; arguments[0].dispatchEvent(new Event('input'));", element)),
+        ("clear and send", lambda: (element.clear(), element.send_keys(value))),
+        ("select all and type", lambda: (element.send_keys(Keys.CONTROL + "a"), element.send_keys(value)))
+    ]
+    
+    for method_name, method in methods:
+        try:
+            if method_name == "clear and send":
+                element.clear()
+                element.send_keys(value)
+            elif method_name == "select all and type":
+                element.send_keys(Keys.CONTROL + "a")
+                element.send_keys(value)
+            else:
+                method()
+            
+            # Verify the input
+            actual_value = element.get_attribute("value")
+            if actual_value == value:
+                logger.info(f"Successfully filled {description} using {method_name}")
+                return True
+        except Exception as e:
+            logger.warning(f"{method_name} failed for {description}: {str(e)}")
+            continue
+    
+    return False
+
+# ==================== MAIN AUTOMATION CLASS ====================
+
+class OSNValidationAutomation:
+    """Container-optimized OSN validation automation"""
+    
+    def __init__(self):
+        self.config = Config
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.driver: Optional[webdriver.Chrome] = None
+        self.screenshots: List[ScreenshotData] = []
+        self.screenshot_dir: Optional[Path] = None
+    
+    def _setup_browser(self, job_id: str):
+        """Setup container-optimized browser"""
+        self.screenshot_dir = Path(Config.get_job_screenshot_dir(job_id))
+        self.screenshot_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Container-optimized Chrome options
+        options = ChromeOptions()
+        
+        # Essential container options
+        if Config.HEADLESS:
+            options.add_argument('--headless=new')
+        if Config.NO_SANDBOX:
+            options.add_argument('--no-sandbox')
+        if Config.DISABLE_DEV_SHM_USAGE:
+            options.add_argument('--disable-dev-shm-usage')
+        
+        # Additional container stability options
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-dev-tools')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--disable-plugins')
+        options.add_argument('--disable-images')
+        options.add_argument('--disable-javascript-harmony-shipping')
+        options.add_argument('--disable-background-timer-throttling')
+        options.add_argument('--disable-backgrounding-occluded-windows')
+        options.add_argument('--disable-renderer-backgrounding')
+        options.add_argument('--disable-features=TranslateUI')
+        options.add_argument('--window-size=1920,1080')
+        options.add_argument('--remote-debugging-port=9222')
+        
+        # Memory and performance optimizations for containers
+        options.add_argument('--memory-pressure-off')
+        options.add_argument('--max_old_space_size=4096')
+        
+        # Create service and driver
+        service = Service(executable_path=Config.CHROMEDRIVER_PATH)
+        self.driver = webdriver.Chrome(service=service, options=options)
+        
+        # Set container-friendly timeouts
+        self.driver.set_page_load_timeout(Config.OSN_PAGE_LOAD_TIMEOUT)
+        self.driver.implicitly_wait(Config.SELENIUM_IMPLICIT_WAIT)
+        
+        logger.info("Container-optimized browser setup completed")
+    
+    def _cleanup_browser(self):
+        """Cleanup browser resources"""
+        if self.driver:
+            try:
+                self.driver.quit()
+                logger.info("Browser cleaned up successfully")
+            except Exception as e:
+                logger.error(f"Browser cleanup error: {str(e)}")
+    
+    def _take_screenshot(self, name: str) -> Optional[ScreenshotData]:
+        """Take and save screenshot"""
+        try:
+            timestamp = datetime.now()
+            filename = f"{name}_{timestamp.strftime('%Y%m%d_%H%M%S')}.png"
+            filepath = self.screenshot_dir / filename
+
+            self.driver.save_screenshot(str(filepath))
+            
+            with open(filepath, 'rb') as f:
+                screenshot_data = base64.b64encode(f.read()).decode()
+            
+            screenshot = ScreenshotData(
+                name=name, 
+                timestamp=timestamp, 
+                data=screenshot_data, 
+                path=str(filepath)
+            )
+            
+            self.screenshots.append(screenshot)
+            logger.info(f"Screenshot saved: {filepath}")
+            return screenshot
+            
+        except Exception as e:
+            logger.error(f"Screenshot failed: {str(e)}")
+            return None
+    
+    def _login(self):
+        """Container-optimized login process"""
+        try:
+            logger.info("Starting OSN login process")
+            self.driver.get("https://partners.openserve.co.za/login")
+            
+            # Wait for page to stabilize
+            time.sleep(5)
+            
+            # Wait for and fill email field
+            email_field = WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located((By.ID, "email"))
+            )
+            
+            if not robust_send_keys(self.driver, email_field, Config.OSEMAIL, "email field"):
+                raise Exception("Failed to fill email field")
+            
+            # Fill password field
+            password_field = self.driver.find_element(By.ID, "password")
+            if not robust_send_keys(self.driver, password_field, Config.OSPASSWORD, "password field"):
+                raise Exception("Failed to fill password field")
+            
+            time.sleep(2)  # Allow form to stabilize
+            
+            # Find and click login button
+            login_button = self.driver.find_element(By.ID, "next")
+            if not robust_click(self.driver, login_button, "login button"):
+                raise Exception("Failed to click login button")
+            
+            # Wait for successful login (navbar appears)
+            WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located((By.ID, "navOrders"))
+            )
+            
+            logger.info("Login successful")
+            
+        except Exception as e:
+            logger.error(f"Login failed: {str(e)}")
+            raise
+    
+    def _navigate_to_orders(self, circuit_number: str):
+        """Navigate to orders page with circuit number"""
+        orders_url = f"https://partners.openserve.co.za/orders?tabIndex=2&isps=628&serviceNumber={circuit_number}"
+        logger.info(f"Navigating to orders page for circuit: {circuit_number}")
+        
+        self.driver.get(orders_url)
+        time.sleep(5)  # Allow page to load
+    
+    def _extract_orders(self) -> List[OrderData]:
+        """Extract order data from table"""
+        orders = []
+        
+        try:
+            # Wait for table to load
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((By.XPATH, "//table//tbody//tr"))
+            )
+            
+            # Get all data rows (excluding header)
+            rows = self.driver.find_elements(By.XPATH, "//table//tbody//tr[td[normalize-space(text())]]")
+            logger.info(f"Found {len(rows)} order rows")
+            
+            for i, row in enumerate(rows):
+                try:
+                    cells = row.find_elements(By.TAG_NAME, "td")
+                    if len(cells) >= 8:  # Ensure we have enough columns
+                        # Extract data from each column
+                        order_number = cells[0].text.strip()
+                        order_type_text = cells[1].text.strip().lower()
+                        external_ref = cells[2].text.strip()
+                        service_number = cells[3].text.strip()
+                        product_name = cells[4].text.strip()
+                        created_on = cells[5].text.strip()
+                        date_implemented = cells[6].text.strip()
+                        order_status = cells[7].text.strip()
+                        
+                        # Determine order type and flags
+                        if "new" in order_type_text or "installation" in order_type_text:
+                            order_type = OrderType.NEW_INSTALLATION
+                            is_new_installation = True
+                            is_cancellation = False
+                        elif "cease" in order_type_text:
+                            order_type = OrderType.CEASE_ACTIVE_SERVICE
+                            is_new_installation = False
+                            is_cancellation = True
+                        else:
+                            order_type = OrderType.MODIFICATION if "modif" in order_type_text else OrderType.UNKNOWN
+                            is_new_installation = False
+                            is_cancellation = False
+                        
+                        # Create order object
+                        order = OrderData(
+                            orderNumber=order_number,
+                            type=order_type,
+                            orderStatus=order_status,
+                            dateImplemented=date_implemented,
+                            is_new_installation=is_new_installation,
+                            is_cancellation=is_cancellation,
+                            serviceNumber=service_number,
+                            externalRef=external_ref,
+                            productName=product_name,
+                            createdOn=created_on
+                        )
+                        
+                        # Set cease order flags
+                        if is_cancellation:
+                            if date_implemented and order_status.lower() == "accepted":
+                                order.is_implemented_cease = True
+                                order.is_pending_cease = False
+                            else:
+                                order.is_implemented_cease = False
+                                order.is_pending_cease = True
+                        
+                        orders.append(order)
+                        logger.info(f"Extracted order: {order_number} - {order_type.value}")
+                        
+                except Exception as e:
+                    logger.warning(f"Failed to parse row {i}: {str(e)}")
+                    continue
+            
+            logger.info(f"Successfully extracted {len(orders)} orders")
+            
+        except Exception as e:
+            logger.error(f"Order extraction failed: {str(e)}")
+        
+        return orders
+    
+    @retry(
+        stop=stop_after_attempt(2),
+        wait=wait_fixed(5),
+        retry=retry_if_exception_type((TimeoutException, WebDriverException))
+    )
+    def validate_circuit(self, request: ValidationRequest) -> ValidationResult:
+        """Main validation method"""
+        start_time = time.time()
+        
+        try:
+            logger.info(f"Starting validation for job {request.job_id}, circuit {request.circuit_number}")
+            
+            # Setup browser
+            self._setup_browser(request.job_id)
+            self._take_screenshot("initial_state")
+            
+            # Login
+            self._login()
+            self._take_screenshot("after_login")
+            
+            # Navigate to orders
+            self._navigate_to_orders(request.circuit_number)
+            self._take_screenshot("orders_page")
+            
+            # Extract orders
+            orders = self._extract_orders()
+            
+            # Determine if circuit exists
+            circuit_found = len(orders) > 0
+            
+            # Create result
+            execution_time = time.time() - start_time
+            
+            if circuit_found:
+                result = ValidationResult(
+                    job_id=request.job_id,
+                    circuit_number=request.circuit_number,
+                    status=ValidationStatus.SUCCESS,
+                    message=f"Circuit {request.circuit_number} found with {len(orders)} orders",
+                    found=True,
+                    orders=orders,
+                    search_result=SearchResult.FOUND,
+                    execution_time=execution_time,
+                    screenshots=self.screenshots,
+                    evidence_dir=str(self.screenshot_dir)
+                )
+            else:
+                result = ValidationResult(
+                    job_id=request.job_id,
+                    circuit_number=request.circuit_number,
+                    status=ValidationStatus.SUCCESS,
+                    message=f"Circuit {request.circuit_number} not found in system",
+                    found=False,
+                    orders=[],
+                    search_result=SearchResult.NOT_FOUND,
+                    execution_time=execution_time,
+                    screenshots=self.screenshots,
+                    evidence_dir=str(self.screenshot_dir)
+                )
+            
+            logger.info(f"Validation completed in {execution_time:.2f}s - Found: {circuit_found}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Validation failed: {str(e)}")
+            self._take_screenshot("error_state")
+            
+            return ValidationResult(
+                job_id=request.job_id,
+                circuit_number=request.circuit_number,
+                status=ValidationStatus.ERROR,
+                message=f"Validation error: {str(e)}",
+                found=False,
+                orders=[],
+                search_result=SearchResult.ERROR,
+                execution_time=time.time() - start_time,
+                screenshots=self.screenshots,
+                evidence_dir=str(self.screenshot_dir) if self.screenshot_dir else None
+            )
+            
+        finally:
+            self._cleanup_browser()
+
+# ==================== MAIN EXECUTION FUNCTION ====================
+
+def execute(parameters: Dict[str, Any]) -> Dict[str, Any]:
+    """Main execution function for container environment"""
+    try:
+        # Create validation request
+        request = ValidationRequest(
+            job_id=parameters.get("job_id"),
+            circuit_number=parameters.get("circuit_number")
+        )
+        
+        # Run automation
+        automation = OSNValidationAutomation()
+        result = automation.validate_circuit(request)
+        
+        # Format result for API response
+        return {
+            "status": result.status.value,
+            "message": result.message,
+            "details": {
+                "found": result.found,
+                "circuit_number": result.circuit_number,
+                "search_result": result.search_result.value,
+                "order_data": [order.dict() for order in result.orders],
+                "validation_status": "complete" if result.status == ValidationStatus.SUCCESS else "failed",
+                "order_count": len(result.orders),
+                "has_new_installation": any(o.is_new_installation for o in result.orders),
+                "has_cancellation": any(o.is_cancellation for o in result.orders),
+                "has_pending_cease": any(o.is_cancellation and o.is_pending_cease for o in result.orders),
+                "has_implemented_cease": any(o.is_cancellation and o.is_implemented_cease for o in result.orders),
+            },
+            "evidence_dir": result.evidence_dir,
+            "screenshot_data": [
+                {
+                    "name": screenshot.name,
+                    "timestamp": screenshot.timestamp.isoformat(),
+                    "data": screenshot.data,
+                    "path": screenshot.path
+                }
+                for screenshot in result.screenshots
+            ],
+            "execution_time": result.execution_time
+        }
+        
+    except Exception as e:
+        logger.error(f"Execute function failed: {str(e)}")
+        return {
+            "status": "error",
+            "message": f"Execution error: {str(e)}",
+            "details": {
+                "found": False,
+                "order_count": 0,
+                "validation_status": "failed"
+            },
+            "screenshot_data": []
+        }
+
+# ==================== TEST EXECUTION ====================
+
+if __name__ == "__main__":
+    """Test the automation locally"""
+    test_params = {
+        "job_id": f"CONTAINER_TEST_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+        "circuit_number": "B510101157"  # Use the same circuit from your log
+    }
+    
+    print("=" * 60)
+    print("OSN Validation - Container-Compatible Version")
+    print("=" * 60)
+    print(f"Testing circuit: {test_params['circuit_number']}")
+    print(f"Job ID: {test_params['job_id']}")
+    print()
+    print("CONTAINER OPTIMIZATIONS:")
+    print("✓ Robust click methods with JavaScript fallback")
+    print("✓ Container-friendly Chrome options")
+    print("✓ Increased wait times for stability")
+    print("✓ Memory and performance optimizations")
+    print("✓ Simplified login process")
+    print("✓ Error handling and retry logic")
+    print("✓ Proper cleanup procedures")
+    print()
+    
+    result = execute(test_params)
+    
+    print("Results:")
+    print("-" * 40)
+    print(f"Status: {result['status']}")
+    print(f"Message: {result['message']}")
+    print(f"Circuit Found: {result['details'].get('found', False)}")
+    print(f"Order Count: {result['details'].get('order_count', 0)}")
+    print()
+    print("SUCCESS: Container-optimized OSN validation ready!")

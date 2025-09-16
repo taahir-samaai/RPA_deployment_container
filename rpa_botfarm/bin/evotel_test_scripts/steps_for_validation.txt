@@ -1,0 +1,81 @@
+    # Step 1: Navigate to Login Page
+    driver.get("https://my.evotel.co.za/Account/Login")
+
+    # Step 2: Click on Email Field
+    email_field = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#Email"))
+    )
+    email_field.click()
+
+    # Step 3: Enter Email Address
+    email_field.send_keys("vcappont2.bot@vcontractor.co.za")
+
+    # Step 4: Click on Password Field
+    password_field = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#Password"))
+    )
+    password_field.click()
+
+    # Step 5: Enter Password
+    password_field.send_keys("Vodabot#01")
+
+    # Step 6: Click on Login Button
+    login_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[@id='loginForm']/form/div[4]/div/button"))
+    )
+    login_button.click()
+
+    # Step 7: Wait for navigation to Manage page
+    WebDriverWait(driver, 10).until(
+        EC.url_contains("https://my.evotel.co.za/Manage/Index")
+    )
+
+    # Step 8: Click on Serial Number Search Field
+    serial_search = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#SearchString"))
+    )
+    serial_search.click()
+
+    # Step 9: Enter Serial Number
+    serial_search.send_keys("\t 48575443D9B290B1")
+
+    # Step 10: Click on "Search Serial" Button
+    search_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[@id='btnSearch']"))
+    )
+    search_button.click()
+
+    # Step 11: Wait for navigation after search
+    WebDriverWait(driver, 10).until(
+        EC.url_contains("https://my.evotel.co.za/Search?SearchString=%09+48575443D9B290B1")
+    )
+
+    # Step 12: Click on Service Link (Vodacom Fibre)
+    service_link = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[@id='WebGrid']/tbody/tr/td[3]/a"))
+    )
+    service_link.click()
+
+    # Step 13: Wait for navigation to Service Info
+    WebDriverWait(driver, 10).until(
+        EC.url_contains("https://my.evotel.co.za/Service/Info/44599da6-2804-4872-b9d0-7fb82b158ae0")
+    )
+
+    # Step 14: Click on "Work Orders" Menu
+    work_orders = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "#work-orders > span"))
+    )
+    work_orders.click()
+
+    # Step 15: Click on the first Work Order (dynamic selection)
+    work_order_link = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//*[@id='ui-id-3']/dl/dd[1]/a"))
+    )
+    work_order_link.click()
+
+    # Step 16: Wait for navigation to Work Order Page
+    WebDriverWait(driver, 10).until(
+        EC.url_contains("https://my.evotel.co.za/WorkOrder/Item/")
+    )
+
+    # Step 17: Scrape all text from the page

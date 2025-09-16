@@ -1,0 +1,15 @@
+# requirements.in - Windows 11 (Worker + Automation)
+# Python 3.12.x
+
+fastapi
+uvicorn[standard]
+pydantic
+requests
+apscheduler
+sqlalchemy
+tenacity
+python-dotenv
+bcrypt
+pyjwt[crypto]
+selenium
+pyotp

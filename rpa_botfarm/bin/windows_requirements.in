@@ -1,0 +1,38 @@
+# Web framework and server
+fastapi>=0.103.0
+uvicorn[standard]>=0.23.0
+
+# Database
+sqlalchemy>=2.0.20
+
+# Schema validation
+pydantic>=2.3.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# HTTP client
+requests>=2.31.0
+
+# Job scheduling
+apscheduler>=3.10.1
+
+# Retry functionality
+tenacity>=8.2.3
+
+# Web automation
+selenium>=4.12.0 #uncomment if installing worker
+
+# Authentication
+python-multipart>=0.0.6
+bcrypt>=4.0.1
+pyjwt>=2.8.0
+
+# ASGI middleware
+starlette>=0.27.0
+
+# Type hints
+typing-extensions>=4.7.1
+
+# OTP generator
+pyotp

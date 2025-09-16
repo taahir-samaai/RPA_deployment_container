@@ -1,0 +1,13 @@
+# requirements.in - Red Hat Enterprise Linux 8.10 (Orchestrator Only)
+# Python 3.12.x
+
+fastapi
+uvicorn
+pydantic
+requests
+apscheduler
+sqlalchemy
+tenacity
+python-dotenv
+pyjwt
+bcrypt

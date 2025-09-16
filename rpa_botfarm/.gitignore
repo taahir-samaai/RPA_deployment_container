@@ -1,0 +1,50 @@
+# .gitignore for Python projects
+
+# Virtual environment directories
+venv/
+.venv/
+env/
+
+# data
+data/
+.data/
+worker_data/
+.worker_data/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.*.override
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# PyCharm/IntelliJ IDE specific
+.idea/
+*.iml
+
+# VS Code specific
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Local development
+*.swp
+*.swo
+
+# Build/distribution directories
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# pytest cache
+.pytest_cache/
